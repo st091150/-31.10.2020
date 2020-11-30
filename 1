@@ -1,15 +1,18 @@
- #include <iostream>
+#include <iostream>
 
+
+ 
 int main()
 {
-
-    int n = 15;
+    int n;
+    std::cout << "Input n :";
+    std::cin >> n;
+    std::cout << std::endl;
     int** M;
     M = new int* [n];
     for (int i = 0; i < n; ++i) {
         M[i] = new int[i + 1];
     }
-
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j <= i; ++j) {
             if (j == i || j == 0) {
@@ -26,22 +29,34 @@ int main()
         p /= 10;
         ++y;
     }
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j <= i; ++j) {
-            p = M[i][j];
-            int u = 0;
-            while (p) {
-                p /= 10;
-                ++u;
+    char l;
+    std::cout << "Print a line or everything before " << n << " ? :(Y = Print a line/N = Everything before " << n<<" )" << std::endl;
+    std::cin >> l;
+    std::cout << std::endl;
+    if( l == 'Y'|| l =='y') {
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j <= i; ++j) {
+                p = M[i][j];
+                int u = 0;
+                while (p) {
+                    p /= 10;
+                    ++u;
+                }
+                while (u <= y) {
+                    std::cout << " ";
+                    ++u;
+                }
+                std::cout << M[i][j];
             }
-            while(u<=y){
-                std::cout << " ";
-                ++u;
-            }
-            std::cout << M[i][j];
+            std::cout << std::endl;
         }
-        std::cout << std::endl;
     }
+    else {
+        for (int i = 0; i < n; ++i) {
+            std::cout << M[n-1][i] << " ";
+        }
+    }
+   
     for (int i = 0; i < n; ++i) {
         delete[] M[i];
     }
